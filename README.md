@@ -10,7 +10,7 @@ Universitá di Padova Gennaio 2020
    1.2 Entra sul’ ambiente PostgreSQL e sulla PostgreSQL Shell:
    
     sudo su postgres
-		psql
+    psql
    
    1.3 Osservare gli utenti esistenti:
    
