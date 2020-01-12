@@ -1,8 +1,8 @@
 # Corso PostGIS
 Universitá di Padova Gennaio 2020
 
-## 1. Installazione PostgreSQL :elephant:
-  ### Ubuntu: ~~(https://itsfoss.com/install-postgresql-ubuntu/)~~
+## Parte I. Installazione PostgreSQL :elephant:
+  ### 1. Ubuntu: ~~(https://itsfoss.com/install-postgresql-ubuntu/)~~
    1.1 Ottiene installatore:
    
     sudo apt-get install postgresql-11 pgadmin4
@@ -44,7 +44,18 @@ a:
 
   1.7 Entra su la DB usando PgAdmin e collegiamo sulla nuova DB:
 
-![Image of connection](/home/egb/Pictures/Screenshot from 2020-01-08 21-26-58.png)
+  ### 2. Windows: ~~(https://www.postgresqltutorial.com/postgresql-tutorial/install-postgresql/)~~
 
-![Image of connection](https://www.oreilly.com/library/view/postgresql-up-and/9781491963401/assets/pur3_0401.png)  
-   
+  2.1 Ottieni l’installatore da: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+  2.2 Seleziona l’ installatore:
+
+![Image of installers](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/Install-PostgreSQL-download-installer.png)
+  
+  2.3 Continua col’ processo d’installazione sul’ wizard…
+  
+  2.4 Verifica la installazione usando SQL Shell
+
+![Image of SQL Shell](https://www.postgresqltutorial.com/wp-content/uploads/2019/05/Install-PostgreSQL-Connect-to-PostgreSQL-via-psql.png)
+
+	   
