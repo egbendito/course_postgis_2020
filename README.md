@@ -1,5 +1,5 @@
 # Practical PostGIS Course
-** Master GIScience **
+**Master GIScience**
 Universitá di Padova Gennaio 2020
 
 ## Parte I. Installazione PostgreSQL :elephant:
