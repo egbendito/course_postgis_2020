@@ -2,7 +2,7 @@
 ## Master GIScience
 #### Universitá di Padova Gennaio 2020
 
-### **Part I. Installing PostgreSQL ![](postgresql1.png)**
+### **Part I. Installing PostgreSQL ![](https://github.com/egbendito/corso_PostGIS/blob/master/img/postgresql1.png)**
 * #### Obtain the installers:
       sudo apt-get install postgresql-11 pgadmin4
 * #### Enter PostgreSQL shell:
@@ -27,7 +27,7 @@
 
     local   all             postgres                       md5
 
-### **Part II. PostGIS ![](postgis1.png)**
+### **Part II. PostGIS ![](https://github.com/egbendito/corso_PostGIS/blob/master/img/postgis1.png)**
 * #### Install PostGIS:
       sudo apt-get install postgis
 * #### In the new `DATABASE`:
