@@ -58,7 +58,7 @@
       COPY 2_pop_municipios_gz FROM '/input_data/2_pob_municipios.csv' DELIMITER '|' CSV HEADER;
 
 ### **Part IV. Some Exercises:**
-* #### Normal Joins.
+* #### [Normal Joins.](sql/2_normal_join.sql)
 We want to know the population in each comune in Galizia using:
   * Attribute table of population (ID = codine); Galicia only.
   * Geometries of populated places (ID = codine); Galicia only.
@@ -70,7 +70,7 @@ We want to know the population in each comune in Galizia using:
         FROM 1_comune_gz a
         LEFT JOIN 2_pob_municipios_gz b ON a.codine=b.codine;
 
-* #### Spatial Joins.
+* #### [Spatial Joins.](sql/3_spatial_join.sql)
 We want to distribute the population along larger areas (to avoid empty spaces). We use:
   * Geometries of populated places (ID = codine); Galicia only.
   * Geometries of municipalities in Galicia (ID = NULL).
@@ -84,19 +84,30 @@ We want to distribute the population along larger areas (to avoid empty spaces).
         LEFT JOIN 2_pob_municipios b ON a.codine=b.codine
         LEFT JOIN 3_bad_municipios_gz c ON ST_Intersects(a.geom,c.geom);
 
-  Filter the table `3_bad_municipios_gz` to only GZ and make a new table `3a_good_municipios_gz`:
+  Filter the table `3_bad_municipios_gz` to only GZ and [make a new table](sql/4_create_good_mun_table.sql) `3a_good_municipios_gz`:
 
-      CREATE TABLE 3a_good_municipios_gz AS
-      SELECT DISTINCT
-        a.codine,
-        b.provincia,
-        b.municipio,
-        c.geom
-      FROM 1_comune_gz a
-      LEFT JOIN 2_pob_municipios b ON a.codine=b.codine
-      LEFT JOIN 3_bad_municipios_gz c ON ST_Intersects(a.geom,c.geom);
+          CREATE TABLE 3a_good_municipios_gz AS
+          SELECT DISTINCT
+            a.codine,
+            b.provincia,
+            b.municipio
+          FROM 1_comune_gz a;
+          --
+          ALTER TABLE 3a_good_municipios_gz
+          ADD COLUMN geom geometry(MultiPolygon, 3035);
+          --
+          UPDATE 3a_good_municipios_gz
+            SET geom = a.geom
+            FROM
+            (SELECT
+              a.codine codine,
+              b.geom
+            FROM 1_comune_gz a
+            LEFT JOIN 3_bad_municipios_gz b ON ST_Intersects(a.geom,b.geom)
+            ) a
+          WHERE 3a_good_municipios_gz.codine = a.codine;
 
-  Then, let’s see how many fires occur in GZ between 2001 and 2014 🤔:
+  Then, let’s see [how many fires](sql/5_gz_fires.sql) occur in GZ between 2001 and 2014 🤔:
 
       SELECT
         a.id,
@@ -107,7 +118,7 @@ We want to distribute the population along larger areas (to avoid empty spaces).
       JOIN 3a_good_municipios_gz b ON ST_Intersects(ST_Transform(a.geom,3035),b.geom)
       ORDER BY yr ASC;
 
-  And calculate number of fires per municipality:
+  And calculate number of [fires per municipality](sql/6_gz_mun_fires.sql):
 
       SELECT
         b.codine,
@@ -125,7 +136,7 @@ Load raster into `PostGIS`:
 
       raster2pgsql -I -C -e -Y -s 3035 -t 6901x6169 /input_data/5a_lc_2012_gz.tif | psql -U my_user -d my_db -h localhost
 
-  Calculate number of fires per land cover type:
+  Calculate number of [fires per land cover type and municipality](sql/7_gz_mun_lc_fires.sql):
 
       WITH
       lc AS
