@@ -107,6 +107,13 @@ We want to distribute the population along larger areas (to avoid empty spaces).
             ) a
           WHERE 3a_good_municipios_gz.codine = a.codine;
 
+  Now, let's have a look (query only) and see the shape of Galiza (GZ) with [Dissolve](sql/41_dissolve.sql)
+  We just want the geometry for the entire GZ using the new table `3a_good_municipios_gz`:
+
+          SELECT
+            ST_Union(geom) geom
+          FROM 3a_good_municipios_gz;
+
   Then, let’s see [how many fires](sql/5_gz_fires.sql) occur in GZ between 2001 and 2014 🤔:
 
       SELECT
