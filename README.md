@@ -1,6 +1,6 @@
 # **Practical PostGIS Course**
 ## Master GIScience
-#### Universitá di Padova Gennaio 2020
+#### Universitá di Padova Gennaio 2021
 
 ### **Part I. Installing PostgreSQL ![](https://github.com/egbendito/corso_PostGIS/blob/master/img/postgresql1.png)**
 * #### Obtain the installers:
